@@ -17,21 +17,24 @@ public class TimeTrackPage extends TestBase  {
     WebElement approveTimeTrackTab;
     @FindBy(xpath = "//*[@class='pagetitle'][text() = 'Approve Time-Track']")
     WebElement approveTimeTrackPageTitle;
-
     @FindBy(id = "approveButton")
     WebElement approveTimeTrackBtn;
-
     @FindBy(id = "rejectButton")
     WebElement rejectTimeTrackBtn;
-
     @FindBy(id = "approveTTTable")
     WebElement approveTimeTrackTable;
-
     @FindBy(className = "userNameInfo")
     List<WebElement> userListInApproveTimeTrackTable;
-
     @FindBy(xpath = "//table[@id='approveTTTable']//tbody[@class='data']//td//input[@type='checkbox']")
     WebElement approveTimeTrackTableFirstUserCheckBox;
+    @FindBy(xpath = "//span[@id='statusFilterButton']")
+    WebElement timeTrackStatuesPanel;
+    @FindBy(xpath = "//input[@id='rejectedCbx']")
+    WebElement rejectedCheckBox;
+    @FindBy(xpath = "//span[@class='ui-button-text'] [text() = \"Apply\"]")
+    WebElement applyBtn;
+    @FindBy(xpath = "//span[@class='statusApprovalSelectorButtonTitle']")
+    WebElement statusApprovalSelectorButtonTitle;
 
     // Call init
     public TimeTrackPage() {
@@ -48,6 +51,20 @@ public class TimeTrackPage extends TestBase  {
         approveTimeTrackTab.click();
     }
 
+    public void getNonRejectedTimeTrack() {
+        String heading = statusApprovalSelectorButtonTitle.getText();
+        if(heading.contains("Rejected"))
+        {
+            driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS) ;
+            timeTrackStatuesPanel.click();
+            rejectedCheckBox.click();
+            applyBtn.click();
+            driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS) ;
+
+        }
+
+
+    }
     public Boolean verifyApproveTimeTrackPageTitle() {
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS) ;
         return approveTimeTrackPageTitle.isDisplayed();
@@ -59,13 +76,14 @@ public class TimeTrackPage extends TestBase  {
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS) ;
         approveTimeTrackBtn.click();
     }
+
     public void clickTimeTrackRejectBtn() {
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS) ;
         rejectTimeTrackBtn.click();
     }
     public void selectFirstUserCheckBox() {
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS) ;
-        if (userListInApproveTimeTrackTable.size() > 0) {
+        if (approveTimeTrackTableFirstUserCheckBox.isDisplayed()) {
             approveTimeTrackTableFirstUserCheckBox.click();
         }
         else{
@@ -73,6 +91,7 @@ public class TimeTrackPage extends TestBase  {
         }
     }
     public Boolean verifyUserNameListCount() {
+        System.out.println("count "+userListInApproveTimeTrackTable.size());
         return userListInApproveTimeTrackTable.size() != 0;
     }
 

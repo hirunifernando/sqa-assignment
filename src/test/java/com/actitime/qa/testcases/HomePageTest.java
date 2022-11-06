@@ -57,7 +57,7 @@ public class HomePageTest extends TestBase{
 //	}
 
 	@Test(priority = 4)
-	public void timeSheetApproveAndRejectTest() {
+	public void timeSheetApprovalTest() {
 
 		homePage.clickOnTimeTrackLink();
 		Assert.assertTrue(timeTrackPage.verifyTimeTrackPageTitle(),"Time Track page title is not loaded");
@@ -68,11 +68,26 @@ public class HomePageTest extends TestBase{
 		Assert.assertTrue(timeTrackPage.verifyApproveTimeTable(),"Approve Time Track table is not loaded");
 		Assert.assertTrue(timeTrackPage.verifyUserNameListCount(),"Empty users in Approve time track table");
 		timeTrackPage.selectFirstUserCheckBox();
-		timeTrackPage.clickTimeTrackRejectBtn();
-
-		driver.navigate().refresh();
-		timeTrackPage.selectFirstUserCheckBox();
 		timeTrackPage.clickTimeTrackApproveBtn();
+
+	}
+	@Test(priority = 5)
+	public void timeSheetRejectTest() {
+
+		homePage.clickOnTimeTrackLink();
+		Assert.assertTrue(timeTrackPage.verifyTimeTrackPageTitle(),"Time Track page title is not loaded");
+		Assert.assertTrue(timeTrackPage.verifyApproveTimeTrackTab(),"Approve time track tab is not loaded");
+		timeTrackPage.clickApproveTimeTrackLink();
+
+		Assert.assertTrue(timeTrackPage.verifyApproveTimeTrackPageTitle(),"Approve Time Track page title is not loaded");
+		timeTrackPage.getNonRejectedTimeTrack();
+		driver.navigate().refresh();
+
+		Assert.assertTrue(timeTrackPage.verifyApproveTimeTable(),"Approve Time Track table is not loaded");
+		Assert.assertTrue(timeTrackPage.verifyUserNameListCount(),"Empty users in Approve time track table");
+		timeTrackPage.selectFirstUserCheckBox();
+		timeTrackPage.clickTimeTrackRejectBtn();
+		driver.navigate().refresh();
 	}
 	@AfterMethod
 	public void tearDown() {

@@ -43,7 +43,6 @@ public class LogonPageTest extends TestBase{
 	
 	
 	@DataProvider
-	
 	public Object[][] getactiTimeTestData() {
 		Object data[][]=testUtil.getTestData(sheetName);
 		return data;
