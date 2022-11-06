@@ -42,12 +42,10 @@ String browserName = properties.getProperty("browser");
 		
 		if(browserName.equals("chrome")){
 			System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
-
 			driver = new ChromeDriver(); 
 		}
 		else if(browserName.equals("Firefox")){
-			//System.setProperty("webdriver.gecko.driver", "//Users//methuliakithma//Documents//Trainings//UCSC//");	
-			driver = new FirefoxDriver(); 
+			driver = new FirefoxDriver();
 		}
 		else if (browserName.equals("IE")){
 			
