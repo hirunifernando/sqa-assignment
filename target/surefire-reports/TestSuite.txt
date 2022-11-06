@@ -1,0 +1,30 @@
+-------------------------------------------------------------------------------
+Test set: TestSuite
+-------------------------------------------------------------------------------
+Tests run: 10, Failures: 2, Errors: 0, Skipped: 8, Time elapsed: 4.801 sec <<< FAILURE!
+seup(com.actitime.qa.testcases.HomePageTest)  Time elapsed: 4.502 sec  <<< FAILURE!
+java.lang.IllegalStateException: The driver executable does not exist: \\Users\methuliakithma\Documents\Trainings\UCSC\chromedriver
+	at com.google.common.base.Preconditions.checkState(Preconditions.java:585)
+	at org.openqa.selenium.remote.service.DriverService.checkExecutable(DriverService.java:146)
+	at org.openqa.selenium.remote.service.DriverService.findExecutable(DriverService.java:141)
+	at org.openqa.selenium.chrome.ChromeDriverService.access$000(ChromeDriverService.java:35)
+	at org.openqa.selenium.chrome.ChromeDriverService$Builder.findDefaultExecutable(ChromeDriverService.java:159)
+	at org.openqa.selenium.remote.service.DriverService$Builder.build(DriverService.java:355)
+	at org.openqa.selenium.chrome.ChromeDriverService.createDefaultService(ChromeDriverService.java:94)
+	at org.openqa.selenium.chrome.ChromeDriver.<init>(ChromeDriver.java:123)
+	at com.actitime.qa.base.TestBase.initialization(TestBase.java:45)
+	at com.actitime.qa.testcases.HomePageTest.seup(HomePageTest.java:24)
+
+seup(com.actitime.qa.testcases.LogonPageTest)  Time elapsed: 4.516 sec  <<< FAILURE!
+java.lang.IllegalStateException: The driver executable does not exist: \\Users\methuliakithma\Documents\Trainings\UCSC\chromedriver
+	at com.google.common.base.Preconditions.checkState(Preconditions.java:585)
+	at org.openqa.selenium.remote.service.DriverService.checkExecutable(DriverService.java:146)
+	at org.openqa.selenium.remote.service.DriverService.findExecutable(DriverService.java:141)
+	at org.openqa.selenium.chrome.ChromeDriverService.access$000(ChromeDriverService.java:35)
+	at org.openqa.selenium.chrome.ChromeDriverService$Builder.findDefaultExecutable(ChromeDriverService.java:159)
+	at org.openqa.selenium.remote.service.DriverService$Builder.build(DriverService.java:355)
+	at org.openqa.selenium.chrome.ChromeDriverService.createDefaultService(ChromeDriverService.java:94)
+	at org.openqa.selenium.chrome.ChromeDriver.<init>(ChromeDriver.java:123)
+	at com.actitime.qa.base.TestBase.initialization(TestBase.java:45)
+	at com.actitime.qa.testcases.LogonPageTest.seup(LogonPageTest.java:30)
+
