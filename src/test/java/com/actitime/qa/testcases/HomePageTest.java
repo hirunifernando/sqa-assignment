@@ -1,5 +1,6 @@
 package com.actitime.qa.testcases;
 
+import com.actitime.qa.pages.TimeTrackPage;
 import com.actitime.qa.pages.UsersPage;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -15,6 +16,7 @@ public class HomePageTest extends TestBase{
 	LoginPage loginPage;
 	HomePage homePage;
 	UsersPage usersPage;
+	TimeTrackPage timeTrackPage;
 	public HomePageTest() {
 		super();
 		
@@ -27,8 +29,9 @@ public class HomePageTest extends TestBase{
 		loginPage = new LoginPage();
 		homePage = loginPage.loging(properties.getProperty("username"), properties.getProperty("password"));
 		usersPage = new UsersPage();
-		
-		
+		timeTrackPage = new TimeTrackPage();
+
+
 	}
 	
 	
@@ -42,7 +45,7 @@ public class HomePageTest extends TestBase{
 
 
 	@Test(priority = 2)
-	public void homePageUsersLinkTest() {
+	public void userProfilesTest() {
 
 		homePage.clickOnUsersLink();
 		Assert.assertTrue(usersPage.verifyUserPageTitle(),"Users page title is not loaded");
@@ -50,7 +53,27 @@ public class HomePageTest extends TestBase{
 		Assert.assertTrue(usersPage.verifyUsersListCount(),"Users Table is empty");
 
 	}
-	
+//	@Test(priority = 3)
+//	}
+
+	@Test(priority = 4)
+	public void timeSheetApproveAndRejectTest() {
+
+		homePage.clickOnTimeTrackLink();
+		Assert.assertTrue(timeTrackPage.verifyTimeTrackPageTitle(),"Time Track page title is not loaded");
+		Assert.assertTrue(timeTrackPage.verifyApproveTimeTrackTab(),"Approve time track tab is not loaded");
+		timeTrackPage.clickApproveTimeTrackLink();
+
+		Assert.assertTrue(timeTrackPage.verifyApproveTimeTrackPageTitle(),"Approve Time Track page title is not loaded");
+		Assert.assertTrue(timeTrackPage.verifyApproveTimeTable(),"Approve Time Track table is not loaded");
+		Assert.assertTrue(timeTrackPage.verifyUserNameListCount(),"Empty users in Approve time track table");
+		timeTrackPage.selectFirstUserCheckBox();
+		timeTrackPage.clickTimeTrackRejectBtn();
+
+		driver.navigate().refresh();
+		timeTrackPage.selectFirstUserCheckBox();
+		timeTrackPage.clickTimeTrackApproveBtn();
+	}
 	@AfterMethod
 	public void tearDown() {
 		driver.quit();
