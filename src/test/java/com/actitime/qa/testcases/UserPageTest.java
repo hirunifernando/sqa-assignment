@@ -1,20 +1,20 @@
 package com.actitime.qa.testcases;
 
+import com.actitime.qa.base.TestBase;
 import com.actitime.qa.pages.*;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
-import com.actitime.qa.base.TestBase;
 import org.testng.asserts.SoftAssert;
 
-public class HomePageTest extends TestBase{
+public class UserPageTest extends TestBase{
 
 	LoginPage loginPage;
 	HomePage homePage;
+	UsersPage usersPage;
 
-	public HomePageTest() {
+	public UserPageTest() {
 		super();
 		
 	}
@@ -25,19 +25,19 @@ public class HomePageTest extends TestBase{
 		initialization();
 		loginPage = new LoginPage();
 		homePage = loginPage.loging(properties.getProperty("username"), properties.getProperty("password"));
-
+		usersPage = new UsersPage();
 	}
 	
 	
 	@Test
-	public void homePageLogoTest() {
-		
-	boolean flag= homePage.validateTimeLogo();
-	Assert.assertTrue(flag,"Cannot find the Logo");
-		
+	public void userProfilesTest() {
+
+		homePage.clickOnUsersLink();
+		Assert.assertTrue(usersPage.verifyUserPageTitle(),"Users page title is not loaded");
+		Assert.assertTrue(usersPage.verifyUserProfilesTable(),"Users Table is not found");
+		Assert.assertTrue(usersPage.verifyUsersListCount(),"Users Table is empty");
+
 	}
-
-
 	@AfterMethod
 	public void tearDown() {
 		driver.quit();
