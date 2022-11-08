@@ -15,7 +15,8 @@ public class LogonPageTest extends TestBase{
 
 	LoginPage loginPage;
 	HomePage homePage;
-	String sheetName = "Users";
+	String validTestDataSheetName = "ValidUsers";
+	String invalidTestDataSheetName = "InvalidUsers";
 	TestUtil testUtil;
 	
 	
@@ -33,7 +34,7 @@ public class LogonPageTest extends TestBase{
 	}
 	
 	
-	@Test(priority = 1)
+	@Test
 	public void loginPageLogoTest() {
 		
 	boolean flag= loginPage.validateActiTimeLogo();
@@ -43,19 +44,35 @@ public class LogonPageTest extends TestBase{
 	
 	
 	@DataProvider
-	public Object[][] getactiTimeTestData() {
-		Object data[][]=testUtil.getTestData(sheetName);
+	public Object[][] getValidLoginTestData() {
+		Object data[][]=testUtil.getTestData(validTestDataSheetName);
 		return data;
 		
 		
 		
 	}
-	@Test(priority = 2,dataProvider="getactiTimeTestData")
-	public void LoginTest(String userName, String password) {
-		homePage = loginPage.loging(userName, password);
+	@DataProvider
+	public Object[][] getInvalidLoginTestData() {
+		Object data[][]=testUtil.getTestData(invalidTestDataSheetName);
+		return data;
+
+
+
 	}
-	
-	
+	@Test(dataProvider="getValidLoginTestData")
+	public void validUserLoginTest(String userName, String password) {
+
+		homePage = loginPage.logging(userName, password);
+	}
+	@Test(dataProvider="getInvalidLoginTestData")
+	public void invalidUserLoginTest(String userName, String password) throws InterruptedException {
+
+		loginPage.invalidLogging(userName, password);
+		Assert.assertEquals(loginPage.validateLoginErrorMessage(),"Username or Password is invalid. Please try again.","Invalid login error msg is not displayed");
+
+	}
+
+
 	@AfterMethod
 	public void tearDown() {
 		

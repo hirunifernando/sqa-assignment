@@ -12,6 +12,8 @@ import com.actitime.qa.base.TestBase;
 
 import net.bytebuddy.asm.Advice.Return;
 
+import java.util.concurrent.TimeUnit;
+
 public class LoginPage extends TestBase {
 	
 	//Page Factory - Object Repository
@@ -38,8 +40,9 @@ public class LoginPage extends TestBase {
 	
 	@FindBy(xpath = "//div[@class='atLogoImg']")
 	WebElement actiTimeLogo;
-	
-	
+	@FindBy(xpath = "//span[@class='errormsg']")
+	WebElement loginErrorMsg;
+
 	//initialization
 	
 	public LoginPage() {
@@ -54,15 +57,31 @@ public class LoginPage extends TestBase {
 	
 	public Boolean validateActiTimeLogo() {
 		return actiTimeLogo.isDisplayed();
-		
+
 	}
-	
-	public HomePage loging(String uName, String pword) {
+	public String validateLoginErrorMessage() {
+		if(loginErrorMsg.isDisplayed()) {
+			return loginErrorMsg.getText();
+		}
+		else
+		{			return "";
+		}
+	}
+
+	public HomePage logging(String uName, String password) {
 		
 		userName.sendKeys(uName);
-		passWord.sendKeys(pword);
+		passWord.sendKeys(password);
 		loginButton.click();
 		return new HomePage();
 		
+	}
+	public void invalidLogging(String uName, String password) throws InterruptedException {
+
+		userName.sendKeys(uName);
+		passWord.sendKeys(password);
+		loginButton.click();
+		Thread.sleep(300);
+
 	}
 }
