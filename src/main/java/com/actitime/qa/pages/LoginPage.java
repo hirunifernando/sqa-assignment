@@ -1,5 +1,6 @@
 package com.actitime.qa.pages;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -43,6 +44,8 @@ public class LoginPage extends TestBase {
 	@FindBy(xpath = "//span[@class='errormsg']")
 	WebElement loginErrorMsg;
 
+	public static Logger logger = Logger.getLogger(LoginPage.class);
+
 	//initialization
 	
 	public LoginPage() {
@@ -61,25 +64,31 @@ public class LoginPage extends TestBase {
 	}
 	public String validateLoginErrorMessage() {
 		if(loginErrorMsg.isDisplayed()) {
+			logger.info("Login error msg is displayed-----");
 			return loginErrorMsg.getText();
 		}
 		else
-		{			return "";
+		{			logger.info("Login error msg is not displayed-----");
+			return "";
 		}
 	}
 
 	public HomePage logging(String uName, String password) {
-		
+		logger.info("Typing user Name-----");
 		userName.sendKeys(uName);
+		logger.info("Typing password-----");
 		passWord.sendKeys(password);
 		loginButton.click();
+		logger.info("Clicking login button-----");
 		return new HomePage();
 		
 	}
 	public void invalidLogging(String uName, String password) throws InterruptedException {
-
+		logger.info("Typing user Name-----");
 		userName.sendKeys(uName);
+		logger.info("Typing password-----");
 		passWord.sendKeys(password);
+		logger.info("Clicking login button-----");
 		loginButton.click();
 		Thread.sleep(300);
 

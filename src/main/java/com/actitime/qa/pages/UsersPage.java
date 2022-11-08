@@ -7,6 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import org.apache.log4j.Logger;
 
 public class UsersPage extends TestBase  {
 
@@ -16,7 +17,7 @@ public class UsersPage extends TestBase  {
     List<WebElement> userProfilesList;
     @FindBy(xpath = "//*[@class='pagetitle']//span[text() = \"List of Users\"]")
     WebElement pageTitle;
-
+    public static Logger logger = Logger.getLogger(UsersPage.class);
     // Call init
     public UsersPage() {
         PageFactory.initElements(driver, this);
@@ -31,6 +32,7 @@ public class UsersPage extends TestBase  {
         return userTable.isDisplayed();
     }
     public Boolean verifyUsersListCount() {
+        logger.info("Getting user list count-----");
         if (userProfilesList.size() == 0)
         {
             return false;

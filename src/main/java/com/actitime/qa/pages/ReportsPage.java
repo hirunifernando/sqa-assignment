@@ -1,6 +1,7 @@
 package com.actitime.qa.pages;
 
 import com.actitime.qa.base.TestBase;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -28,7 +29,7 @@ public class ReportsPage extends TestBase  {
     @FindBy(xpath = "//div[@class='reportNameWrapper']/div[@class='reportName']")
     WebElement reportTitle;
 
-
+    public static Logger logger = Logger.getLogger(ReportsPage.class);
     // Call init
     public ReportsPage() {
 
@@ -45,18 +46,22 @@ public class ReportsPage extends TestBase  {
     }
     public void clickPastMonthLeaveReport() {
         driver.manage().timeouts().implicitlyWait(200, TimeUnit.SECONDS) ;
+        logger.info("Clicking past Months Leave Chart Section-----");
         pastMonthsLeaveReportContainer.click();
     }
     public String getReportName() {
+        logger.info("get Report Name-----");
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS) ;
             return reportTitle.getText();
 
     }
     public void clickAttendanceReport() {
+        logger.info("Clicking Attendance Chart Section-----");
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS) ;
         attendanceReportContainer.click();
     }
     public void clickCreateChartCancelBtn() {
+        logger.info("Clicking cancel button-----");
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS) ;
         createCharCancelBtn.click();
     }

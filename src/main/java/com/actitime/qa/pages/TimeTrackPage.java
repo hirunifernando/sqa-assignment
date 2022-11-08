@@ -1,6 +1,7 @@
 package com.actitime.qa.pages;
 
 import com.actitime.qa.base.TestBase;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -35,7 +36,7 @@ public class TimeTrackPage extends TestBase  {
     WebElement applyBtn;
     @FindBy(xpath = "//span[@class='statusApprovalSelectorButtonTitle']")
     WebElement statusApprovalSelectorButtonTitle;
-
+    public static Logger logger = Logger.getLogger(TimeTrackPage.class);
     // Call init
     public TimeTrackPage() {
         PageFactory.initElements(driver, this);
@@ -73,11 +74,13 @@ public class TimeTrackPage extends TestBase  {
         return approveTimeTrackTable.isDisplayed();
     }
     public void clickTimeTrackApproveBtn() {
+        logger.info("Clicking Approve Button-----");
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS) ;
         approveTimeTrackBtn.click();
     }
 
     public void clickTimeTrackRejectBtn() {
+        logger.info("Clicking reject Button-----");
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS) ;
         rejectTimeTrackBtn.click();
     }
@@ -91,7 +94,7 @@ public class TimeTrackPage extends TestBase  {
         }
     }
     public Boolean verifyUserNameListCount() {
-        System.out.println("count "+userListInApproveTimeTrackTable.size());
+        logger.info("UserNameListCount-----"+userListInApproveTimeTrackTable.size());
         return userListInApproveTimeTrackTable.size() != 0;
     }
 
